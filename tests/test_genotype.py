@@ -21,3 +21,9 @@ class TestGenotype(unittest.TestCase):
         for src, expected in self.all_valid_cases():
             msg = "Expected '{}' to parse to '{}'".format(src, expected)
             self.assertEqual(Genotype.parse(src), expected, msg)
+
+    def test_parsing_invalid(self):
+        invalid_cases = ("a", " 1a", "Samson", "7b")
+        for src in invalid_cases:
+            with self.assertRaises(ValueError):
+                Genotype.parse(src)
