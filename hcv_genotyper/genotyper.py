@@ -39,6 +39,7 @@ BLAST_PARAMS = {
 
 
 class Genotype(ty.NamedTuple):
+    "An HCV genotype, with an optional subgenotype"
     gt: int
     sub_gt: ty.Optional[str]
 
@@ -62,6 +63,12 @@ class MatchScore(ty.NamedTuple):
 
 
 def do_blast_search(seqfilename: str, resultfilename: str):
+    """Perform a BLAST search
+
+    The sequences in the input file (called `seqfilename`) will BLAST searched
+    against this library's HCV reference sequences. The output is stored in a
+    file called `resultfilename`.
+    """
     cmd = NcbiblastnCommandline(
         query=seqfilename, out=resultfilename, **BLAST_PARAMS
     )
@@ -69,6 +76,11 @@ def do_blast_search(seqfilename: str, resultfilename: str):
 
 
 def blast_search_descriptions(seq: str) -> ty.List[Record.Description]:
+    """Perform a blast search on nucleotide sequence `seq`.
+
+    Uses temporary files to send the input sequence to `blast` and get the
+    results.
+    """
     with tempfile.NamedTemporaryFile(buffering=0) as seqfile:
         seqfile.write("> Sequence\n{}".format(seq).encode("utf8"))
         seqfile.seek(0)  # reset file handle
