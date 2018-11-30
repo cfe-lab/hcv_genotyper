@@ -50,7 +50,7 @@ class Genotype(ty.NamedTuple):
             msg = f"Error parsing genotype '{src}'"
             raise ValueError(msg)
         gt_src, subgt_src = match.groups()
-        return Genotype(gt=int(gt_src), sub_gt=subgt_src)
+        return Genotype(gt=int(gt_src), sub_gt=subgt_src or None)
 
 
 class MatchScore(ty.NamedTuple):
