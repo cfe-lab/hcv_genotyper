@@ -1,14 +1,17 @@
 import setuptools
 
-import hcv_genotyper
 
 
 install_requires = ["biopython >=1.72, < 4.0"]
 
 setuptools.setup(
     name="hcv_genotyper",
-    version=hcv_genotyper.__version__,
+    version="0.1.0",
     packages=setuptools.find_packages(),
+    package_data={
+        "hcv_genotyper": ["*.fasta"],
+    },
+    include_package_data=True,
     author="Nathaniel Knight",
     author_email="nknight@cfenet.ubc.ca",
     description="Determine the genotype of HCV sequences using BLAST",

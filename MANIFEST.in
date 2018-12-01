@@ -1,1 +1,1 @@
-hcv_genotyper/hcv-refs.fasta
+include hcv-refs.fasta
