@@ -27,3 +27,10 @@ class TestGenotype(unittest.TestCase):
         for src in invalid_cases:
             with self.assertRaises(ValueError):
                 Genotype.parse(src)
+
+    def test_formatting(self):
+        cases = [((1, "a"), "1a"), ((1, None), "1"), ((2, "b"), "2b")]
+        for inpt, expected in cases:
+            gt = Genotype(*inpt)
+            msg = "Expected str(Genotype{}) to be '{}'".format(inpt, expected)
+            self.assertEqual(str(gt), expected, msg)

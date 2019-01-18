@@ -53,6 +53,10 @@ class Genotype(ty.NamedTuple):
         gt_src, subgt_src = match.groups()
         return Genotype(gt=int(gt_src), sub_gt=subgt_src or None)
 
+    def __str__(self) -> str:
+        sub_gt = self.sub_gt if self.sub_gt else ""
+        return "{}{}".format(self.gt, sub_gt)
+
 
 class MatchScore(ty.NamedTuple):
     gt: Genotype
